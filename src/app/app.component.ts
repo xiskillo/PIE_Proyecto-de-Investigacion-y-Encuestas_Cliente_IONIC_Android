@@ -10,6 +10,9 @@ import { PushService } from './services/push.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+
+  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

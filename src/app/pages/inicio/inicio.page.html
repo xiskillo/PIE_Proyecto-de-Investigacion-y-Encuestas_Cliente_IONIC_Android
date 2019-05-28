@@ -1,15 +1,59 @@
 <ion-header no-border>
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
+  <ion-toolbar color="medium">
+    <ion-title>Hospital Universitario Puerta del Mar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding color="medium">
 
-<p>BIENVENIDA</p>
+<h2>Proyecto de Investigación y Encuestas</h2>
 
-<ion-button routerLink="/qr">LEER CÓDIGO QR</ion-button>
-<ion-button routerLink="/ver-encuestas">VER ENCUESTAS DISPONIBLES</ion-button>
+
+
+<ion-button expand="full" routerLink="/qr">CÓDIGO DE REGISTRO</ion-button>
+<ion-button expand="full" routerLink="/ver-encuestas">VER ENCUESTAS DISPONIBLES</ion-button>
+<ion-button expand="full" routerLink="/testing">TESTING</ion-button>
+
+
+<ion-list >
+  <ion-list-header>
+    <ion-label >NOTICIAS DISPONIBLES:</ion-label>
+  </ion-list-header>
+
+  
+
+  <ion-item *ngFor="let n of notificaciones">
+    <ion-label>
+    
+      <h3>{{n.title}}</h3>
+      <p>{{n.body}}</p>
+
+      <p>
+        {{ n.additionalData | json}}
+      </p>
+    
+    
+    </ion-label>
+
+
+  </ion-item>
+
+
+
+</ion-list>
+
+
+
+
+
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="medium">
+    <div style="text-align:center">
+    <img src="../../assets/imgs/logo2.png" />
+    </div>
+  </ion-toolbar>
+</ion-footer>
 

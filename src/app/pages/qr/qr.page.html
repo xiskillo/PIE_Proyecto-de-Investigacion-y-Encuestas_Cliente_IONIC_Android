@@ -1,9 +1,39 @@
 
-<app-header titulo="QR"></app-header>
-<ion-content>
+<app-header titulo="REGISTRO DE USUARIO"></app-header>
+<ion-content color="medium">
 
-<p>LEER QR</p>
+<p>CÓDIGO DE REGISTRO</p>
 
+Código de Encuesta: {{codigoRegistroUnificado}}
+
+<ion-slides>
+
+    <ion-slide>
+        <ion-button expand="full" size="large" shape="round" (click)="escanearQR()">ESCANEAR CÓDIGO </ion-button>
+     </ion-slide>
+
+</ion-slides>
+
+
+<ion-button expand="full" fill="outline" shape="round" (click)=registrarNuhsa()>INTRODUCIR CÓDIGO MANUALMENTE</ion-button>
+
+<ion-button expand="full"  shape="round" (click)=registrarUsuario(); color="success">REGISTRARSE</ion-button>
+
+<p>{{ nuhsaQR }}</p>
+
+<br>
+<p>{{ nuhsaQRcodificado }}</p>
+
+
+<p>{{ nuhsaManual }}</p>
 
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="medium">
+    <div style="text-align:center">
+    <img src="../../assets/imgs/logo2.png" />
+    </div>
+  </ion-toolbar>
+</ion-footer>
