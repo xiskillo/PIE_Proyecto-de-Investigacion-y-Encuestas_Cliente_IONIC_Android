@@ -1,43 +1,45 @@
-<app-header titulo="VER ENCUESTAS"></app-header>
+<app-header titulo="Hospital Puerta del Mar"></app-header>
 
 <ion-content color="medium">
 
 
 
-Identificador: {{pushService.identificador}}
+<div style="text-shadow:1px -3px 5px rgba(200,145,255,0.7);font-weight:normal;
+          color:#079b8c;letter-spacing:2pt;word-spacing:1pt;font-size:28px;text-align:center;
+          font-family:lucida sans unicode, lucida grande, sans-serif;line-height:1;"> TUS PREGUNTAS</div>
+
+<br><br>
 
 
-
-
-<ion-button expand="full"  (click)="apiService.postProcedimientos()">
-  AÑADIR PROCEDIMIENTOS
-</ion-button>
-
-<ion-button expand="full"  (click)="apiService.putProcedimientos(codigo)">
- PUT PROCEDIMIENTOS
-  </ion-button>
-
-<!-- <ion-button expand="full" (click)="getPreguntas(this.nuhsa)">
-   VER ENCUESAS CONSOLE LOG
-  </ion-button> -->
-
-
-
-
-<ion-list>    
-    <ion-item style="color: #47d1ff" (click)="contestarPregunta(e.id, e.pregunta)" *ngFor="let e of encuestas">     
-      <ion-icon slot="start" name="clipboard"></ion-icon>        
-      <h2>{{ e.pregunta | uppercase }}</h2>
-     
-      </ion-item>
-</ion-list>
-
+<ion-content color="medium">
+<ion-card color="primary" (click)="contestarPregunta(e.id, e.pregunta)" *ngFor="let e of encuestas_contestadas">
+  <ion-card-header>
+    <ion-card-subtitle>Pregunta: </ion-card-subtitle>
+    <ion-card-title>{{e.pregunta}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content color="danger">
+    Pulse para responder..
+  </ion-card-content>
+</ion-card>
+</ion-content>
 
 
 
  
 
 </ion-content>
+
+
+<ion-footer>
+
+  <ion-toolbar color="medium">
+  <ion-button color="dark" expand="full" shape="round" (click)="instruccionesEncuestas()">INSTRUCCIONES</ion-button>
+   
+  </ion-toolbar>
+</ion-footer>
+
+
+<ion-footer>
 
 <ion-footer>
   <ion-toolbar color="medium">

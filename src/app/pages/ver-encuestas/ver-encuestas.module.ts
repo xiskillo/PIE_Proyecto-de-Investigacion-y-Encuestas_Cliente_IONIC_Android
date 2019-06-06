@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { VerEncuestasPage } from './ver-encuestas.page';
 import { ComponentsModule } from '../../components/components.module';
+import { InstruccionesEncuestasComponent } from '../../components/instrucciones-encuestas/instrucciones-encuestas.component';
+import { GraciasEncuestasComponent } from '../../components/gracias-encuestas/gracias-encuestas.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +19,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    InstruccionesEncuestasComponent, GraciasEncuestasComponent,
+    
+  ],
   imports: [
     CommonModule,
     FormsModule,

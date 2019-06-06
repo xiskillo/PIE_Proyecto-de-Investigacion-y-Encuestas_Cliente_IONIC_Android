@@ -1,15 +1,14 @@
 export class RegistrosQR{
 
-    public format: string;
-    public text: string;
-    public created: Date;
+    public codificado: string;
+    public descodificado: string;
+    public fecha_creacion: Date;
 
 
-    constructor( format: string, text: string){
+    constructor( codificado: string, descodificado: string){
 
-        this.format = format;
-        this.text = text;
-
-        this.created = new Date();
+        this.codificado = codificado;
+        this.descodificado = descodificado;
+        this.fecha_creacion = new Date();
     }
 }

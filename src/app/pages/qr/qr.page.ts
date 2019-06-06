@@ -3,8 +3,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { DataLocalService } from '../../services/data-local.service';
 import { ApiService } from '../../services/api.service';
 import { AlertController } from '@ionic/angular';
-import { PushService } from '../../services/push.service';
-
+import { PopoverController } from '@ionic/angular';
+import { InstruccionesQRComponent } from '../../components/instrucciones-qr/instrucciones-qr.component';
 
 
 
@@ -21,19 +21,25 @@ export class QrPage implements OnInit {
   nuhsaManual: string;
   nuhsaManualCodificado: string;
   codigoRegistroUnificado: string;
+  registroActual: string;
 
 
-  
-  
-
-
-  constructor(public alertController: AlertController, private barcodeScanner: BarcodeScanner, 
-    private dataLocal: DataLocalService, public apiService: ApiService, pushService: PushService) { }
+  constructor(private alertController: AlertController, private barcodeScanner: BarcodeScanner, 
+    public dataLocal : DataLocalService, public apiService: ApiService, private popoverController: PopoverController) { }
 
   ngOnInit() {
+
+    
+      
+      this.apiService.NUHSA = this.dataLocal.registrosQR[0].descodificado;
+      this.apiService.getUsuarioNuhsa();
+      this.registroActual = this.dataLocal.registrosQR[0].descodificado;
+
+
+
   }
 
-
+  
 
   escanearQR(){
     this.barcodeScanner.scan().then(barcodeData => {
@@ -43,17 +49,14 @@ export class QrPage implements OnInit {
         this.nuhsaQR = atob(this.nuhsaQRcodificado);
         this.apiService.NUHSA = this.nuhsaQR;
         this.codigoRegistroUnificado = this.nuhsaQR;
-        this.dataLocal.guardarRegistroQR( barcodeData.format, barcodeData.text);
+        this.dataLocal.guardarRegistroQR( barcodeData.text, this.nuhsaQR);
         this.apiService.getUsuarioNuhsa();
 
       }
-      
      }).catch(err => {
          console.log('Error', err);
-         this.dataLocal.guardarRegistroQR( 'ERROR FORMAT QR', 'ERROR TEXTO QR');
+         this.dataLocal.guardarRegistroQR( 'ERROR CODIFICADO', 'ERROR DESCODIFICADO');
      });
-
-     
   }
 
 
@@ -67,7 +70,6 @@ export class QrPage implements OnInit {
           type: 'text',
           placeholder: 'Introduce tu código de registro personal..'
         },
-        
       ],
       buttons: [
         {
@@ -86,8 +88,6 @@ export class QrPage implements OnInit {
             this.apiService.NUHSA = this.nuhsaManual;
             this.codigoRegistroUnificado = this.nuhsaManual;
             this.apiService.getUsuarioNuhsa();
-            
-          
           }
         }
       ]
@@ -116,6 +116,18 @@ export class QrPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+
+
+  async instruccionesQR(){
+    const popover = await this.popoverController.create({
+      component: InstruccionesQRComponent,
+      mode: 'md',
+      translucent: true
+    });
+    return await popover.present();
+
   }
 
 }

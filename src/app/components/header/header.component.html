@@ -1,10 +1,14 @@
 <ion-header no-border>
-  <ion-toolbar>
+  <ion-toolbar color="medium">
    
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="/"></ion-back-button>
+      <ion-back-button text="" defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
 
-     <ion-title text-capitalize> {{titulo}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)=salir()>SALIR</ion-button>
+    </ion-buttons>
+  
+     <ion-title> {{titulo}} </ion-title>
   </ion-toolbar>
 </ion-header>

@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { InicioPage } from './inicio.page';
+import { InstruccionesInicioComponent } from '../../components/instrucciones-inicio/instrucciones-inicio.component';
+import { ComponentsModule } from '../../components/components.module';
 
 const routes: Routes = [
   {
@@ -15,11 +17,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    InstruccionesInicioComponent,
+    
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ComponentsModule,
   ],
   declarations: [InicioPage]
 })

@@ -1,10 +1,30 @@
 
-<app-header titulo="REGISTRO DE USUARIO"></app-header>
+<app-header titulo="Hospital Puerta del Mar"></app-header>
 <ion-content color="medium">
 
-<p>CÓDIGO DE REGISTRO</p>
 
-Código de Encuesta: {{codigoRegistroUnificado}}
+  
+
+<div style="text-shadow:1px -3px 5px rgba(200,145,255,0.7);font-weight:normal;
+          color:#079b8c;letter-spacing:2pt;word-spacing:1pt;font-size:28px;text-align:center;
+          font-family:lucida sans unicode, lucida grande, sans-serif;line-height:1;"> REGISTRO DEL USUARIO</div>
+
+<br><br>
+
+
+      <div style="text-shadow:1px -3px 5px rgba(200,145,255,0.7);font-weight:normal;
+      color:#079b8c;letter-spacing:2pt;word-spacing:1pt;font-size:22px;text-align:center;
+      font-family:lucida sans unicode, lucida grande, sans-serif;line-height:1;">Código Introducido:<br> {{codigoRegistroUnificado}}</div>
+
+<br><br>     
+
+
+<div style="text-shadow:1px -3px 5px rgba(200,145,255,0.7);font-weight:normal;
+color:#079b8c;letter-spacing:2pt;word-spacing:1pt;font-size:22px;text-align:center;
+font-family:lucida sans unicode, lucida grande, sans-serif;line-height:1;">Código registrado actual:<br> {{registroActual}}</div>
+
+<br><br>   
+
 
 <ion-slides>
 
@@ -15,23 +35,52 @@ Código de Encuesta: {{codigoRegistroUnificado}}
 </ion-slides>
 
 
-<ion-button expand="full" fill="outline" shape="round" (click)=registrarNuhsa()>INTRODUCIR CÓDIGO MANUALMENTE</ion-button>
+
+<ion-button color="warning" expand="full" shape="round" (click)=registrarNuhsa()>INTRODUCIR CÓDIGO MANUALMENTE</ion-button>
 
 <ion-button expand="full"  shape="round" (click)=registrarUsuario(); color="success">REGISTRARSE</ion-button>
 
-<p>{{ nuhsaQR }}</p>
-
-<br>
-<p>{{ nuhsaQRcodificado }}</p>
 
 
-<p>{{ nuhsaManual }}</p>
+<ion-label><div style="text-shadow:1px -3px 5px rgba(153, 177, 151, 0.7);font-weight:normal;
+  color:#565691;letter-spacing:6pt;word-spacing:-1pt;font-size:16px;text-align:center;
+  font-family:palatino linotype, palatino, serif;line-height:3;margin:0px;padding:0px;">
+      HISTORIAL DE REGISTROS</div></ion-label>
+
+
+ <ion-content color="medium">
+
+<ion-card color="tertiary" *ngFor="let i of dataLocal.registrosQR; let x = index">
+  <div *ngIf="x<3">
+    <ion-card-header>
+      <ion-card-subtitle>Registro: {{x+1}} </ion-card-subtitle>
+      <ion-card-title>{{i.descodificado}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+    {{i.fecha_creacion | date: 'medium'}}
+    </ion-card-content>
+  </div>
+</ion-card>
+</ion-content>
+
 
 
 </ion-content>
 
+
 <ion-footer>
+
   <ion-toolbar color="medium">
+  <ion-button color="dark" expand="full" shape="round" (click)="instruccionesQR()">INSTRUCCIONES</ion-button>
+   
+  </ion-toolbar>
+</ion-footer>
+
+
+<ion-footer>
+
+  <ion-toolbar color="medium">
+  
     <div style="text-align:center">
     <img src="../../assets/imgs/logo2.png" />
     </div>

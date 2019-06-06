@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { QrPage } from './qr.page';
 import { ComponentsModule } from '../../components/components.module';
+import { InstruccionesQRComponent } from '../../components/instrucciones-qr/instrucciones-qr.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +18,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    InstruccionesQRComponent,
+    
+  ],
   imports: [
     CommonModule,
     FormsModule,

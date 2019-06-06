@@ -12,4 +12,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  salir(){
+    navigator['app'].exitApp();
+  }
+
 }

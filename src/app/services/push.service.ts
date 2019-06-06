@@ -8,24 +8,15 @@ import { Storage } from '@ionic/storage'
 export class PushService {
 
   identificadorDispositivo: string;
-
-  notificaciones: OSNotificationPayload[] = [
-    //{
-      // titulo: "Titulo Push",
-      // contenido: "Cuerpo del push",
-      // date: new Date()
-   // }
-  ];
-
+  notificaciones: OSNotificationPayload[] = [];
 
   emitir = new EventEmitter<OSNotificationPayload>(); // OBSERVABLE QUE CADA VEZ QUE ES LLAMADO EMITE UN OSNPAYLOAD
 
   constructor(private oneSignal: OneSignal, private storage: Storage) {
 
-    this.leerNotificaciones();
+  this.leerNotificaciones();
+
    }
-
-
 
   async getNotificaciones(){
 
@@ -44,17 +35,15 @@ export class PushService {
 
       this.oneSignal.handleNotificationReceived().subscribe((n) => {
       // ACCIONES EN CUANTO SE RECIBE UNA PUSH
-
       console.log( 'OK NOTIFICACIÓN RECIBIDA' , n);
-
       this.comprobarNotificacion(n);
       });
 
-      this.oneSignal.handleNotificationOpened().subscribe((n) => {
+      this.oneSignal.handleNotificationOpened().subscribe( async (n) => {
         // do something when a notification is opened
         console.log( 'OK NOTIFICACIÓN ABIERTA' , n);
+        await this.comprobarNotificacion(n.notification);
       });
-
 
       this.oneSignal.getIds().then( x =>{
         this.identificadorDispositivo = x.userId;
@@ -62,15 +51,13 @@ export class PushService {
       });
 
       this.oneSignal.endInit();
-        }
+      }
 
   
   async comprobarNotificacion(n: OSNotification){
 
     await this.leerNotificaciones();
-
     const payload = n.payload;
-
     const validar = this.notificaciones.find(x => x.notificationID === payload.notificationID);
 
     if (validar){
@@ -78,9 +65,8 @@ export class PushService {
     }
 
     this.notificaciones.unshift(payload);
-    this.emitir.emit(payload);
-    
-    this.guardarNotificaciones();
+    this.emitir.emit(payload);    
+    await this.guardarNotificaciones();
 
   
   }
@@ -91,10 +77,21 @@ export class PushService {
   }
 
   async leerNotificaciones(){
+  this.notificaciones = await this.storage.get('notificaciones') || []; // POR QUE PUEDE DEVOLVER NULL SI NO EXISTE
+  return this.notificaciones;
+  }
 
-   this.notificaciones = await this.storage.get('notificaciones') || []; // POR QUE PUEDE DEVOLVER NULL SI NO EXISTE
 
+  async borrarNoticias(){
+    await this.storage.remove('notificaciones');
+    this.notificaciones = [];
+    this.guardarNotificaciones();
+  }
+
+  borrarNoticiasIndividual(i){
     
+    this.notificaciones.splice(i,1);
+    this.guardarNotificaciones();
   }
 
 
