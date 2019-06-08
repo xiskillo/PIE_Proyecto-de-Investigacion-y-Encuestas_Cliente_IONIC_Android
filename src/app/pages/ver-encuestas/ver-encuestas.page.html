@@ -3,6 +3,7 @@
 <ion-content color="medium">
 
 
+<br><br>
 
 <div style="text-shadow:1px -3px 5px rgba(200,145,255,0.7);font-weight:normal;
           color:#079b8c;letter-spacing:2pt;word-spacing:1pt;font-size:28px;text-align:center;
@@ -11,8 +12,18 @@
 <br><br>
 
 
+
+<div *ngIf="encuestas_contestadas[0]==null" style="text-shadow:1px -3px 5px rgba(200,145,255,0.7);font-weight:normal;
+          color:#4268a5;letter-spacing:2pt;word-spacing:1pt;font-size:18px;text-align:center;
+          font-family:lucida sans unicode, lucida grande, sans-serif;line-height:1;"> SIN PREGUNTAS DISPONIBLES </div>
+
+<br>
+
+
 <ion-content color="medium">
 <ion-card color="primary" (click)="contestarPregunta(e.id, e.pregunta)" *ngFor="let e of encuestas_contestadas">
+  
+  
   <ion-card-header>
     <ion-card-subtitle>Pregunta: </ion-card-subtitle>
     <ion-card-title>{{e.pregunta}}</ion-card-title>

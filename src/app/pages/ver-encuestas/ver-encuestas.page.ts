@@ -19,7 +19,7 @@ export class VerEncuestasPage implements OnInit {
   encuestas_contestadas: any[]=[];
 
 
-  
+  aux: any;
   test: any[]=[];
   procedimientos: any[]=[];
   codigo: any; 
@@ -117,9 +117,9 @@ async contestarPregunta(id, pregunta) {
           console.log(pregunta);
           console.log('ID');
           console.log(id);
-          this.apiService.putEncuestas(id, x.respuesta);
+          this.aux=this.apiService.putEncuestas(id, x.respuesta);
           this.gracias();
-          
+          console.log(this.aux);
           setTimeout(() => {
             this.getEncuestas();
             

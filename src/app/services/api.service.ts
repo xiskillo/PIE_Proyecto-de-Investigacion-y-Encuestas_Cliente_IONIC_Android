@@ -9,7 +9,7 @@ import { PushService } from './push.service';
 })
 export class ApiService {
 
-  STATIC_URL: string = "http://217.216.16.61:8000";
+  STATIC_URL: string = "http://proyectodeinvestigacionyencuestas.franjoacva.website";
 
   NUHSA: string;
   PACIENTE_NUHSA: any[];
@@ -92,8 +92,8 @@ putRegistroUsuario(id: any, android: string) {
 
 async getTokenPost() {
   let body = {
-    "username" : "administrador",
-    "password" : "administrador"
+    "username" : "admin",
+    "password" : "proyectointegrado"
   };
   await this.http.post(this.STATIC_URL + "/api/token/", body )
     .subscribe(x => {

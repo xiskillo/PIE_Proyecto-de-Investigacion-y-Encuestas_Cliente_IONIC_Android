@@ -68,7 +68,7 @@ export class QrPage implements OnInit {
         {
           name: 'codigo',
           type: 'text',
-          placeholder: 'Introduce tu código de registro personal..'
+          placeholder: 'Introduce tu código de registro..'
         },
       ],
       buttons: [
